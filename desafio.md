@@ -197,11 +197,17 @@ CREATE TABLE enrollment (
 ) PARTITION BY RANGE (enrollment_date);
 
 -- criação das partições
+
 CREATE TABLE enrollment_2023 PARTITION OF enrollment
 FOR VALUES FROM ('2023-01-01') TO ('2024-01-01');
 
 CREATE TABLE enrollment_2024 PARTITION OF enrollment
 FOR VALUES FROM ('2024-01-01') TO ('2025-01-01');
+
+-- Partição padrão, caso a data não tenha correspondência nos filtros aplicados na criação das partições os dados serão direcionados para a partição padrão.
+
+CREATE TABLE enrollment_default PARTITION OF enrollment
+DEFAULT;
 
 
 8) Sinta-se a vontade para sugerir e aplicar qualquer ajuste que achares relevante. Comente-os
